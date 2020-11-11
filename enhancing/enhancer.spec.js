@@ -1,43 +1,43 @@
-// const enhancer = require('./enhancer.js');
-// // test away!
 const { expect, it } = require('@jest/globals');
-const { repair, success, fail, get } = require('./enhancer');
+const { repair, success, fail, get } = require('./enhancer.js');
 const {
-    itemOne,
-    itemTwo,
-    itemThree,
-    itemFour,
-    itemFive,
-    itemSix,
+	itemOne,
+	itemTwo,
+	itemThree,
+	itemFour,
+	itemFive,
+	itemSix,
 } = require('./items');
 
-describe('repait(item)', () => {
-    it('returns an item with durability raised to 100', () => {
-        const repairedItemOne = repair(itemOne);
-        expect(repairedItemOne.durability).toBe(100);    
-    });
+describe('repair(item)', () => {
+	it('returns an item with durability raised to 100', () => {
+		const repairedItemOne = repair(itemOne);
+		expect(repairedItemOne.durability).toBe(100);
+	});
 
-    it('does not raise durability beyond an item with 100 durability', () => {
-        const repairedItemThree = repair(itemThree);
-        expect(repairedItemThree.durability).toBeLessThan(101);
-    });
+	it("doesn't raise durability beyond on item with 100 durability", () => {
+		const repairedItemThree = repair(itemThree);
+		expect(repairedItemThree.durability).toBeLessThan(101);
+	});
 });
 
 describe('success(item)', () => {
-    it('Raises enhancement by 1 on items with enhancement value <= 20', () => {
-        const enhancedItemOne = success(itemOne);
-        expect(enhancedItemOne.enhancement).toBe(13);
-    });
-    it('Does not raise enhancement for items with an enhancement value of 20', () => {
-        const enhancedItemTwo = success(itemTwo);
-        expect(enhancedItemTwo.enhancement).not.toBe(21);
-    });
-    it('Does not effect durability of items', () => {
-        const enhancedItemOne = success(itemOne);
-        const enhancedItemTwo = success(itemTwo);
-        expect(enhancedItemOne.durability).toBe(75);
-        expect(enhancedItemTwo.durability).toBe(60);
-    });
+	it('raises enhancement by 1 on items with enhancement value <= 20', () => {
+		const enhancedItemOne = success(itemOne);
+		expect(enhancedItemOne.enhancement).toBe(13);
+	});
+
+	it("doesn't raise enhancement for items with an enhancement value of 20", () => {
+		const enhancedItemTwo = success(itemTwo);
+		expect(enhancedItemTwo.enhancement).not.toBe(21);
+	});
+
+	it("doesn't affect durability of items", () => {
+		const enhancedItemOne = success(itemOne);
+		const enhancedItemTwo = success(itemTwo);
+		expect(enhancedItemOne.durability).toBe(75);
+		expect(enhancedItemTwo.durability).toBe(60);
+	});
 });
 
 describe('fail(item)', () => {
